@@ -36,4 +36,7 @@ public final class TowerAandD extends JavaPlugin {
 class V{
 //次に付与される資金の記憶システム
 static HashMap<Player,Integer> nextPlayerMoney;
+
+static int CoreHealth1;
+static int CoreHealth2;
 }

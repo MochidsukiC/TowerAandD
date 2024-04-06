@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
 import static jp.houlab.mochidsuki.toweraandd.GameStarter.playerTP;
+import static jp.houlab.mochidsuki.toweraandd.GameStarter.putCore;
 import static jp.houlab.mochidsuki.toweraandd.MoneySystem.giveInitial;
 
 public class CommandListener implements CommandExecutor {
@@ -16,6 +17,7 @@ public class CommandListener implements CommandExecutor {
                 case "start":{
                     playerTP();
                     giveInitial();
+                    putCore();
                 }
 
             }
