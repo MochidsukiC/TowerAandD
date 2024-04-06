@@ -1,0 +1,14 @@
+name: TowerAandD
+version: '${project.version}'
+main: jp.houlab.mochidsuki.toweraandd.TowerAandD
+api-version: '1.20'
+
+
+
+commands:
+  tad:
+    aliases: [TowerAandD]
+    description: メインコマンド
+    permission: RecordingAssistant.command.main
+    permission-message: Permission denied
+    usage: Banana
