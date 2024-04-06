@@ -1,8 +1,11 @@
 package jp.houlab.mochidsuki.toweraandd;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Team;
+
+import java.util.HashMap;
 
 public final class TowerAandD extends JavaPlugin {
     static public Team team1;
@@ -28,4 +31,9 @@ public final class TowerAandD extends JavaPlugin {
         // Plugin shutdown logic
         getLogger().info("TowerAandD Plugin Power off!");
     }
+}
+
+class V{
+//次に付与される資金の記憶システム
+static HashMap<Player,Integer> nextPlayerMoney;
 }

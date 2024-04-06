@@ -1,6 +1,9 @@
 package jp.houlab.mochidsuki.toweraandd;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 
 
@@ -16,5 +19,10 @@ public class GameStarter {
             Player player = plugin.getServer().getPlayer(entity);
             player.teleport(new Location(plugin.getServer().getWorld(config.getString("World")), config.getInt("Team.spawn.2.x"), config.getInt("Team.spawn.2.y"), config.getInt("Team.spawn.2.z")));
         }
+    }
+
+    static public void putCore() {
+        plugin.getServer().getWorld(config.getString("World")).setType(new Location(plugin.getServer().getWorld(config.getString("World")), config.getInt("Core.1.x"), config.getInt("Core.1.y"), config.getInt("Core.1.z")), Material.BEACON);
+        plugin.getServer().getWorld(config.getString("World")).setType(new Location(plugin.getServer().getWorld(config.getString("World")), config.getInt("Core.2.x"), config.getInt("Core.2.y"), config.getInt("Core.2.z")), Material.BEACON);
     }
 }
