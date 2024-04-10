@@ -21,3 +21,13 @@ Core:
     y: 61
     z: 1
   Health: 100
+
+PrepareTime: 60
+
+Border:
+  +X: 54
+  -X: -42
+  +Z: 21
+  -Z: -12
+  +y: -2
+  -y: -53

@@ -5,9 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-import static jp.houlab.mochidsuki.toweraandd.GameStarter.playerTP;
-import static jp.houlab.mochidsuki.toweraandd.GameStarter.putCore;
-import static jp.houlab.mochidsuki.toweraandd.MoneySystem.giveInitial;
+import static jp.houlab.mochidsuki.toweraandd.V.Round;
 
 public class CommandListener implements CommandExecutor {
     @Override
@@ -15,9 +13,9 @@ public class CommandListener implements CommandExecutor {
         if(s.equalsIgnoreCase("tad")){
             switch (strings[0]){
                 case "start":{
-                    playerTP();
-                    giveInitial();
-                    putCore();
+                    Round = 1;
+                    RoundSystem.startPrepare();
+                    break;
                 }
 
             }
