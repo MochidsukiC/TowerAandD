@@ -9,8 +9,5 @@
         <module name="TowerAandD" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="TowerAandD" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

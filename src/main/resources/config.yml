@@ -22,6 +22,16 @@ Core:
     z: 1
   Health: 100
 
+Generator:
+  1:
+    x: 0
+    y: 59
+    z: 0
+  2:
+    x: 1
+    y: 59
+    z: 1
+
 PrepareTime: 60
 
 Border:

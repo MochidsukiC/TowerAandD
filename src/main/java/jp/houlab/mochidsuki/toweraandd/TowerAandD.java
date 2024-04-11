@@ -64,9 +64,11 @@ class V{
 //次に付与される資金の記憶システム
 static HashMap<Player,Integer> nextPlayerMoney;
 
-static int CoreHealth1;
-static int CoreHealth2;
 static int Round;
 static int RoundTimer;
 static BossBar TimerBossBar;
+static TeamStatus team1 = new TeamStatus();
+static TeamStatus team2 = new TeamStatus();
+static SiteStatus siteStatus0 = new SiteStatus();
+static SiteStatus siteStatus1 = new SiteStatus();
 }
