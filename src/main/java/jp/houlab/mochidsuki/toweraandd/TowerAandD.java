@@ -6,7 +6,6 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Team;
 
 import java.util.HashMap;
@@ -69,6 +68,6 @@ static int RoundTimer;
 static BossBar TimerBossBar;
 static TeamStatus team1 = new TeamStatus();
 static TeamStatus team2 = new TeamStatus();
-static SiteStatus siteStatus0 = new SiteStatus();
 static SiteStatus siteStatus1 = new SiteStatus();
+static SiteStatus siteStatus2 = new SiteStatus();
 }

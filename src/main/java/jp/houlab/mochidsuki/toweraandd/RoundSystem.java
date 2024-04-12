@@ -51,27 +51,29 @@ public class RoundSystem {
 
         //debug zone
         for(OfflinePlayer offlinePlayer : plugin.getServer().getOperators()){
-            Player player = (Player) offlinePlayer;
-            player.sendMessage("=debug info===================");
-            player.sendMessage("team1");
-            player.sendMessage(team1.getPlayers()+"");
-            player.sendMessage(team1.getTeam()+"");
-            player.sendMessage(team1.getSide()+"");
-            player.sendMessage("SiteStatus");
-            player.sendMessage(team1.getSiteStatus().getTeamId()+"");
-            player.sendMessage(team1.getSiteStatus().getCoreLocation()+"");
-            player.sendMessage(team1.getSiteStatus().getGeneratorLocation()+"");
-            player.sendMessage(Arrays.toString(team1.getSiteStatus().getSpawn()));
+            if(offlinePlayer.isOnline()) {
+                Player player = plugin.getServer().getPlayer(offlinePlayer.getName());
+                player.sendMessage("=debug info===================");
+                player.sendMessage("team1");
+                player.sendMessage(team1.getPlayers() + "");
+                player.sendMessage(team1.getTeam() + "");
+                player.sendMessage(team1.getSide() + "");
+                player.sendMessage("SiteStatus");
+                player.sendMessage(team1.getSiteStatus().getTeamId() + "");
+                player.sendMessage(team1.getSiteStatus().getCoreLocation() + "");
+                player.sendMessage(team1.getSiteStatus().getGeneratorLocation() + "");
+                player.sendMessage(Arrays.toString(team1.getSiteStatus().getSpawn()));
 
-            player.sendMessage("team2");
-            player.sendMessage(team2.getPlayers()+"");
-            player.sendMessage(team2.getTeam()+"");
-            player.sendMessage(team2.getSide()+"");
-            player.sendMessage("SiteStatus");
-            player.sendMessage(team2.getSiteStatus().getTeamId()+"");
-            player.sendMessage(team2.getSiteStatus().getCoreLocation()+"");
-            player.sendMessage(team2.getSiteStatus().getGeneratorLocation()+"");
-            player.sendMessage(Arrays.toString(team2.getSiteStatus().getSpawn()));
+                player.sendMessage("team2");
+                player.sendMessage(team2.getPlayers() + "");
+                player.sendMessage(team2.getTeam() + "");
+                player.sendMessage(team2.getSide() + "");
+                player.sendMessage("SiteStatus");
+                player.sendMessage(team2.getSiteStatus().getTeamId() + "");
+                player.sendMessage(team2.getSiteStatus().getCoreLocation() + "");
+                player.sendMessage(team2.getSiteStatus().getGeneratorLocation() + "");
+                player.sendMessage(Arrays.toString(team2.getSiteStatus().getSpawn()));
+            }
         }
     }
 }

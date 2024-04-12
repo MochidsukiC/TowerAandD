@@ -15,13 +15,13 @@ public class SiteStatus {
 
     {
         initialization();
+        spawn = new boolean[5];
     }
 
     //初期化
     public void initialization(){
         loadCoreLocation();
         loadGeneratorLocation();
-        spawn = new boolean[5];
     }
 
     //Team
