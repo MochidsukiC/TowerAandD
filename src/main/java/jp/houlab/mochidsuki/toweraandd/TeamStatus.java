@@ -1,13 +1,21 @@
 package jp.houlab.mochidsuki.toweraandd;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static jp.houlab.mochidsuki.toweraandd.TowerAandD.plugin;
+import static jp.houlab.mochidsuki.toweraandd.TowerAandD.*;
 
 public class TeamStatus {
     public int coreHealth;
@@ -15,6 +23,11 @@ public class TeamStatus {
     public Team team;
     public int side;
     public SiteStatus siteStatus;
+    public BossBar coreHealthBar;
+
+    {
+        coreHealthBar = plugin.getServer().createBossBar("コア残り体力 - ", BarColor.RED, BarStyle.SEGMENTED_12);
+    }
 
     //coreHealth
     public void setCoreHealth(int coreHealthInt){
@@ -63,5 +76,19 @@ public class TeamStatus {
     }
     public SiteStatus getSiteStatus(){
         return siteStatus;
+    }
+
+    //Bossbar
+    public BossBar getBossbar(){
+        return coreHealthBar;
+    }
+    public void refreshBossbar(){
+        coreHealthBar.setTitle("コア残り体力 - " + coreHealth/config.getInt("Core.Health")*100+"%");
+        coreHealthBar.setProgress(coreHealth/config.getDouble("Core.Health"));
+        if(team == team1) {
+            coreHealthBar.setColor(BarColor.RED);
+        } else if (team == team2) {
+            coreHealthBar.setColor(BarColor.BLUE);
+        }
     }
 }

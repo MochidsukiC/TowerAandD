@@ -73,4 +73,5 @@ static TeamStatus team1 = new TeamStatus();
 static TeamStatus team2 = new TeamStatus();
 static SiteStatus siteStatus1 = new SiteStatus();
 static SiteStatus siteStatus2 = new SiteStatus();
+
 }
