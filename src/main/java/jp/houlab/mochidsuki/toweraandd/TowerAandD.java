@@ -50,6 +50,9 @@ public final class TowerAandD extends JavaPlugin {
 
         //Command
         getCommand("tad").setExecutor(new CommandListener());
+
+        //Event
+        getServer().getPluginManager().registerEvents(new Listener(), this);
     }
 
     @Override

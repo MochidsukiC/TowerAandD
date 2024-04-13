@@ -22,8 +22,8 @@ public class GameStarter {
     }
 
     static public void putCore() {
-        plugin.getServer().getWorld(config.getString("World")).setType(V.team1.getSiteStatus().getCoreLocation(), Material.BEACON);
-        plugin.getServer().getWorld(config.getString("World")).setType(V.team2.getSiteStatus().getCoreLocation(), Material.BEACON);
+        plugin.getServer().getWorld(config.getString("World")).setType(V.team1.getSiteStatus().getCoreLocation(), Material.EMERALD_BLOCK);
+        plugin.getServer().getWorld(config.getString("World")).setType(V.team2.getSiteStatus().getCoreLocation(), Material.EMERALD_BLOCK);
         V.team1.setCoreHealth(config.getInt("Core.Health"));
         V.team2.setCoreHealth(config.getInt("Core.Health"));
     }
