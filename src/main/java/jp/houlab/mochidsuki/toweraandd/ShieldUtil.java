@@ -33,7 +33,7 @@ public class ShieldUtil {
     }
 
     public int getShieldNow(){
-        if(chest != null) {
+        if(chest != null && (chest.getItemMeta()) != null) {
             Damageable d = (Damageable) chest.getItemMeta();
 
             double dDamage = Objects.requireNonNull(d).getDamage();

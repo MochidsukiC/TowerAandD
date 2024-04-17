@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.potion.PotionEffectType;
 
@@ -60,9 +61,9 @@ public class Listener implements org.bukkit.event.Listener {
 
             //シールド
             double damage = event.getFinalDamage();
-            if (player.getInventory().getItem(22) != null) {
-                if (player.getInventory().getItem(22).getType() == Material.LEATHER_CHESTPLATE || player.getInventory().getItem(22).getType() == Material.CHAINMAIL_CHESTPLATE || player.getInventory().getItem(22).getType() == Material.IRON_CHESTPLATE || player.getInventory().getItem(22).getType() == Material.GOLDEN_CHESTPLATE || player.getInventory().getItem(22).getType() == Material.DIAMOND_CHESTPLATE || player.getInventory().getItem(22).getType() == Material.NETHERITE_CHESTPLATE) {
-                    ShieldUtil shieldUtil = new ShieldUtil(player.getInventory().getItem(22));
+            if (player.getInventory().getItem(EquipmentSlot.CHEST) != null) {
+                if (player.getInventory().getItem(EquipmentSlot.CHEST).getType() == Material.LEATHER_CHESTPLATE || player.getInventory().getItem(EquipmentSlot.CHEST).getType() == Material.CHAINMAIL_CHESTPLATE || player.getInventory().getItem(EquipmentSlot.CHEST).getType() == Material.IRON_CHESTPLATE || player.getInventory().getItem(EquipmentSlot.CHEST).getType() == Material.GOLDEN_CHESTPLATE || player.getInventory().getItem(EquipmentSlot.CHEST).getType() == Material.DIAMOND_CHESTPLATE || player.getInventory().getItem(EquipmentSlot.CHEST).getType() == Material.NETHERITE_CHESTPLATE) {
+                    ShieldUtil shieldUtil = new ShieldUtil(player.getInventory().getItem(EquipmentSlot.CHEST));
                     if (shieldUtil.getShieldNow() > 0) {
                         int shieldNow;
 
@@ -83,9 +84,9 @@ public class Listener implements org.bukkit.event.Listener {
                         }
                         event.setDamage(damage);
                         double da = (shieldUtil.getShieldMax() - shieldNow) / shieldUtil.getShieldMax() * shieldUtil.getShieldMaxDurability();
-                        Damageable damageable = (Damageable) player.getInventory().getItem(22).getItemMeta();
+                        Damageable damageable = (Damageable) player.getInventory().getItem(EquipmentSlot.CHEST).getItemMeta();
                         damageable.setDamage((int) da);
-                        player.getInventory().getItem(22).setItemMeta(damageable);
+                        player.getInventory().getItem(EquipmentSlot.CHEST).setItemMeta(damageable);
 
                     }
                 }

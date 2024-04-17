@@ -44,6 +44,7 @@ public final class TowerAandD extends JavaPlugin {
         new EveryTicks().runTaskTimer(this,0L,1);
         new EverySeconds().runTaskTimer(this,0L,20);
 
+
         //BossBar
         TimerBossBar = this.getServer().createBossBar("開始までお待ちください。。。", BarColor.WHITE, BarStyle.SEGMENTED_10);
         TimerBossBar.setVisible(false);

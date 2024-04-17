@@ -5,6 +5,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -20,8 +21,8 @@ public class EveryTicks extends BukkitRunnable {
         for(Player player : plugin.getServer().getOnlinePlayers()) {
 
             try {
-                Optional<ItemStack> headItem = Optional.ofNullable(player.getInventory().getItem(21));
-                Optional<ItemStack> bootsItem = Optional.ofNullable(player.getInventory().getItem(23));
+                Optional<ItemStack> headItem = Optional.ofNullable(player.getInventory().getItem(EquipmentSlot.HEAD));
+                Optional<ItemStack> bootsItem = Optional.ofNullable(player.getInventory().getItem(EquipmentSlot.FEET));
                 ChatColor colorH = ChatColor.RESET;
                 ChatColor colorB = ChatColor.RESET;
 
@@ -69,7 +70,7 @@ public class EveryTicks extends BukkitRunnable {
                 String half;
                 String openings;
 
-                ShieldUtil shieldUtil = new ShieldUtil(player.getInventory().getItem(22));
+                ShieldUtil shieldUtil = new ShieldUtil(player.getInventory().getItem(EquipmentSlot.CHEST));
                 shield = String.join("", Collections.nCopies((int) (shieldUtil.getShieldNow() / 2), "■"));
 
                 if (!(shieldUtil.getShieldNow() % 2 == 0)) {
