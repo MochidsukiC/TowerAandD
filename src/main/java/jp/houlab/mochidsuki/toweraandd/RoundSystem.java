@@ -7,6 +7,7 @@ import net.kyori.adventure.title.Title;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Team;
 
 import java.util.Arrays;
 
@@ -26,6 +27,9 @@ public class RoundSystem {
 
 
         TimerBossBar.setVisible(true);
+        team1.getBossbar().setVisible(false);
+        team2.getBossbar().setVisible(false);
+
         for (Player player : plugin.getServer().getOnlinePlayers()) {
             TimerBossBar.addPlayer(player);
         }
@@ -47,6 +51,11 @@ public class RoundSystem {
             player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT,100,1);
         }
         BorderManager.open();
+        TimerBossBar.setVisible(false);
+        team1.getBossbar().setVisible(true);
+        team2.getBossbar().setVisible(true);
+
+
 
 
         //debug zone
@@ -76,4 +85,26 @@ public class RoundSystem {
             }
         }
     }
+
+    static public void endRound(TeamStatus loseTeam){
+        TeamStatus winTeam;
+        if(loseTeam.getTeam() == TowerAandD.team1){
+            winTeam = team2;
+        } else {
+            winTeam =team1;
+        }
+
+        for (Player player : winTeam.getPlayers()){
+            TextComponent textComponent = Component.text("ラウンド勝利!!").color(TextColor.color(255,254,0));
+            player.showTitle(Title.title(textComponent,Component.text("")));
+            player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE,100,1);
+        }
+        winTeam.setPoint(winTeam.getPoint()+1);
+        for (Player player : loseTeam.getPlayers()){
+            TextComponent textComponent = Component.text("ラウンド敗北!!").color(TextColor.color(255,254,0));
+            player.showTitle(Title.title(textComponent,Component.text("")));
+            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH,100,1);
+        }
+    }
+
 }

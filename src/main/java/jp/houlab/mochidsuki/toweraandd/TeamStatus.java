@@ -24,6 +24,7 @@ public class TeamStatus {
     public int side;
     public SiteStatus siteStatus;
     public BossBar coreHealthBar;
+    public int point;
 
     {
         coreHealthBar = plugin.getServer().createBossBar("コア残り体力 - ", BarColor.RED, BarStyle.SEGMENTED_12);
@@ -83,12 +84,24 @@ public class TeamStatus {
         return coreHealthBar;
     }
     public void refreshBossbar(){
-        coreHealthBar.setTitle("コア残り体力 - " + coreHealth/config.getInt("Core.Health")*100+"%");
+        coreHealthBar.setTitle("コア残り体力 - " + coreHealth*100/config.getInt("Core.Health")+"%");
         coreHealthBar.setProgress(coreHealth/config.getDouble("Core.Health"));
+        for(Player player : plugin.getServer().getOnlinePlayers()){
+            coreHealthBar.addPlayer(player);
+        }
+
         if(team == team1) {
             coreHealthBar.setColor(BarColor.RED);
         } else if (team == team2) {
             coreHealthBar.setColor(BarColor.BLUE);
         }
+    }
+
+    //Point
+    public void setPoint(int point) {
+        this.point = point;
+    }
+    public int getPoint() {
+        return point;
     }
 }
