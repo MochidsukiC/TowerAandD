@@ -12,3 +12,9 @@ commands:
     permission: RecordingAssistant.command.main
     permission-message: Permission denied
     usage: Banana
+  spawnCore:
+    aliases: [spawncore]
+    description: メインコマンド
+    permission: RecordingAssistant.command.main
+    permission-message: Permission denied
+    usage: Banana

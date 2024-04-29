@@ -22,6 +22,10 @@ import static jp.houlab.mochidsuki.toweraandd.V.*;
 public class RoundSystem {
     static public void startPrepare() {
 
+        for (int i = 0;i<5;i++) {
+            spawnScore.put(i, 0);
+        }
+
         siteStatus1.loadSpawnLocation(1);
         siteStatus2.loadSpawnLocation(2);
 
@@ -45,7 +49,6 @@ public class RoundSystem {
             case 4:
             case 7:
                 break;
-
         }
 
     }

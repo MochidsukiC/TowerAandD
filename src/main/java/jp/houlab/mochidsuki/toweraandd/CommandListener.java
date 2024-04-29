@@ -1,10 +1,15 @@
 package jp.houlab.mochidsuki.toweraandd;
 
+import org.bukkit.Location;
+import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import static jp.houlab.mochidsuki.toweraandd.TowerAandD.*;
 import static jp.houlab.mochidsuki.toweraandd.TowerAandD.team1;
 import static jp.houlab.mochidsuki.toweraandd.TowerAandD.team2;
 import static jp.houlab.mochidsuki.toweraandd.V.*;
@@ -45,6 +50,43 @@ public class CommandListener implements CommandExecutor {
 
 
             }
+        }
+        if(s.equalsIgnoreCase("spawnCore")){
+            try {
+                BlockCommandSender sender1 = (BlockCommandSender) sender;
+                Location spawnLocation = sender1.getBlock().getLocation();
+                for(Player player:plugin.getServer().getOnlinePlayers()){
+                    if(spawnLocation.distance(player.getLocation()) <=3){
+                        if(team1.hasEntry(player.getName())){
+                            spawnScore.put(Integer.valueOf(strings[0]),spawnScore.get(Integer.parseInt(strings[0])) + 1);
+
+                            if(player.isOp()){
+                                player.sendMessage(spawnScore.get(Integer.parseInt(strings[0]))+"");
+                            }
+                        } else if (team2.hasEntry(player.getName())) {
+                            spawnScore.put(Integer.valueOf(strings[0]),spawnScore.get(Integer.parseInt(strings[0])) - 1);
+                            if(player.isOp()){
+                                player.sendMessage(spawnScore.get(Integer.parseInt(strings[0]))+"");
+                            }
+                        }
+                    }
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            /*
+            try {
+                Entity entity = (Entity) sender;
+                if(entity.getServer().getScoreboardManager().getMainScoreboard().getTeam(entity.getScoreboardEntryName()) == team1) {
+                    spawnScore.put(Integer.valueOf(strings[0]), spawnScore.get(strings[0]) + 1);
+                }else {
+                    spawnScore.put(Integer.valueOf(strings[0]), spawnScore.get(strings[0]) - 1);
+                }
+
+            }catch (Exception ignored){}
+
+             */
         }
         return false;
     }
