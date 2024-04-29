@@ -15,7 +15,7 @@ public class CommandListener implements CommandExecutor {
         if(s.equalsIgnoreCase("tad")){
             switch (strings[0]){
                 case "start":{
-                    Round = 1;
+                    Round = 0;
                     boolean[] spawn = new boolean[5];
 
                     V.team1.setTeam(team1);
@@ -37,8 +37,12 @@ public class CommandListener implements CommandExecutor {
                     break;
                 }
                 case "reload":{
-
+                    break;
                 }
+                case "Round":{
+                    sender.sendMessage(Round+"");
+                }
+
 
             }
         }

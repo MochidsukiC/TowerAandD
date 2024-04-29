@@ -11,6 +11,7 @@ public class SiteStatus {
     public int teamId;
     public Location coreLocation;
     public Location generatorLocation;
+    public Location spawnLocation;
     public boolean[] spawn;
 
     {
@@ -64,5 +65,13 @@ public class SiteStatus {
     }
     public boolean[] getSpawn(){
         return spawn;
+    }
+
+    public void loadSpawnLocation(int i) {
+        spawnLocation = new Location(plugin.getServer().getWorld(config.getString("World")), config.getInt("Team.spawn."+ i +".x"), config.getInt("Team.spawn."+ i +".y"), config.getInt("Team.spawn."+ i +".z"));
+    }
+
+    public Location getSpawnLocation() {
+        return spawnLocation;
     }
 }

@@ -7,6 +7,7 @@ import net.kyori.adventure.title.Title;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Team;
 
 import java.util.Arrays;
@@ -20,10 +21,15 @@ import static jp.houlab.mochidsuki.toweraandd.V.*;
 
 public class RoundSystem {
     static public void startPrepare() {
+
+        siteStatus1.loadSpawnLocation(1);
+        siteStatus2.loadSpawnLocation(2);
+
         BorderManager.close();
         playerTP();
         giveInitial();
         putCore();
+        Round++;
 
 
         TimerBossBar.setVisible(true);
@@ -51,6 +57,7 @@ public class RoundSystem {
             player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT,100,1);
         }
         BorderManager.open();
+        Round++;
         TimerBossBar.setVisible(false);
         team1.getBossbar().setVisible(true);
         team2.getBossbar().setVisible(true);
@@ -87,23 +94,77 @@ public class RoundSystem {
     }
 
     static public void endRound(TeamStatus loseTeam){
+        Round++;
         TeamStatus winTeam;
         if(loseTeam.getTeam() == TowerAandD.team1){
             winTeam = team2;
         } else {
             winTeam =team1;
         }
+        winTeam.setPoint(winTeam.getPoint()+1);
+        if(V.team1.getPoint() == 2 || V.team2.getPoint() == 2) {
+            finishGame();
+            return;
+        }
+
 
         for (Player player : winTeam.getPlayers()){
             TextComponent textComponent = Component.text("ラウンド勝利!!").color(TextColor.color(255,254,0));
             player.showTitle(Title.title(textComponent,Component.text("")));
             player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE,100,1);
         }
-        winTeam.setPoint(winTeam.getPoint()+1);
-        for (Player player : loseTeam.getPlayers()){
-            TextComponent textComponent = Component.text("ラウンド敗北!!").color(TextColor.color(255,254,0));
+        for (Player player : loseTeam.getPlayers()) {
+            TextComponent textComponent = Component.text("ラウンド敗北!!").color(TextColor.color(255, 254, 0));
+            player.showTitle(Title.title(textComponent, Component.text("")));
+            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 100, 1);
+        }
+
+        new BukkitRunnable(){
+
+            @Override
+            public void run() {
+                switch (Round){
+                    case 3:
+                        team1.setSiteStatus(siteStatus2);
+                        team2.setSiteStatus(siteStatus1);
+                        break;
+                    case 6:
+                        team1.setSiteStatus(siteStatus1);
+                        team2.setSiteStatus(siteStatus2);
+                        break;
+                }
+                startPrepare();
+            }
+        }.runTaskLater(plugin,150L);
+
+    }
+
+    static public void finishGame(){
+        for (Player player : plugin.getServer().getOnlinePlayers()){
+            player.teleport(plugin.getServer().getWorld("World").getSpawnLocation());
+        }
+        TeamStatus winTeam;
+        TeamStatus loseTeam;
+        if(team1.getPoint() == 2){
+            //team1 win
+            winTeam = team1;
+            loseTeam = team2;
+        } else{
+            //team2 win
+            winTeam = team2;
+            loseTeam = team1;
+        }
+
+
+        for (Player player : winTeam.getPlayers()){
+            TextComponent textComponent = Component.text("ゲーム勝利!!").color(TextColor.color(255,254,0));
             player.showTitle(Title.title(textComponent,Component.text("")));
-            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH,100,1);
+            player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE,100,1);
+        }
+        for (Player player : loseTeam.getPlayers()) {
+            TextComponent textComponent = Component.text("ゲーム敗北!!").color(TextColor.color(255, 254, 0));
+            player.showTitle(Title.title(textComponent, Component.text("")));
+            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 100, 1);
         }
     }
 

@@ -1,7 +1,9 @@
 package jp.houlab.mochidsuki.toweraandd;
 
+import org.bukkit.Particle;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -12,6 +14,9 @@ public class EveryTicks extends BukkitRunnable {
     public void run() {
         V.team1.refreshBossbar();
         V.team2.refreshBossbar();
+
+
+        //Debug FIELD
     }
 
 

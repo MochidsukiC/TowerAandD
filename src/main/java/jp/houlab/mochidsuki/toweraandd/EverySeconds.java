@@ -39,7 +39,6 @@ public class EverySeconds extends BukkitRunnable {
                 }
                 if (RoundTimer == 0) {
                     TimerBossBar.setVisible(false);
-                    Round++;
                     startRound();
                 }
                 break;
