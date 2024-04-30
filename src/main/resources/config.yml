@@ -43,3 +43,4 @@ Border:
   -y: -53
 
 SpawnPoint: 5
+SpawnScoreMaxK: 200

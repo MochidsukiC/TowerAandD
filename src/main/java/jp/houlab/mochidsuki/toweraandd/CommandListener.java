@@ -1,5 +1,11 @@
 package jp.houlab.mochidsuki.toweraandd;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.ComponentBuilder;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.util.HSVLike;
+import net.kyori.adventure.util.RGBLike;
 import org.bukkit.Location;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
@@ -52,25 +58,59 @@ public class CommandListener implements CommandExecutor {
             }
         }
         if(s.equalsIgnoreCase("spawnCore")){
+            int id = Integer.parseInt(strings[0]);
             try {
                 BlockCommandSender sender1 = (BlockCommandSender) sender;
                 Location spawnLocation = sender1.getBlock().getLocation();
                 for(Player player:plugin.getServer().getOnlinePlayers()){
                     if(spawnLocation.distance(player.getLocation()) <=3){
+                        spawnTextDisplay.get(id).teleport(spawnLocation.add(0,3,0));
                         if(team1.hasEntry(player.getName())){
-                            spawnScore.put(Integer.valueOf(strings[0]),spawnScore.get(Integer.parseInt(strings[0])) + 1);
+                            spawnScore.put(Integer.valueOf(strings[0]),spawnScore.get(id) + 1);
 
                             if(player.isOp()){
-                                player.sendMessage(spawnScore.get(Integer.parseInt(strings[0]))+"");
+                                player.sendMessage(spawnScore.get(id)+"");
                             }
                         } else if (team2.hasEntry(player.getName())) {
-                            spawnScore.put(Integer.valueOf(strings[0]),spawnScore.get(Integer.parseInt(strings[0])) - 1);
+                            spawnScore.put(Integer.valueOf(strings[0]),spawnScore.get(id) - 1);
                             if(player.isOp()){
-                                player.sendMessage(spawnScore.get(Integer.parseInt(strings[0]))+"");
+                                player.sendMessage(spawnScore.get(id)+"");
                             }
                         }
+
+                        TextComponent component = Component.text("[");
+                        int score = spawnScore.get(id);
+                        if(spawnScore.get(id)>0){
+                            //1,blue
+                            for(int i=0;i<score - 10;i++) {
+                                component.append(Component.text("□", TextColor.color(0,0,170)));
+                            }
+                            for(int i=0;i<score;i++) {
+                                component.append(Component.text("■", TextColor.color(0,0,170)));
+                            }
+                            for(int i=0;i<10;i++) {
+                                component.append(Component.text("□", TextColor.color(255,85,85)));
+                            }
+                        } else if (spawnScore.get(id)<0) {
+                            //2,red
+                            for(int i=0;i<10;i++) {
+                                component.append(Component.text("□", TextColor.color(0,0,170)));
+                            }
+                            for(int i=0;i<score;i++) {
+                                component.append(Component.text("■", TextColor.color(255,85,85)));
+                            }
+                            for(int i=0;i<score - 10;i++) {
+                                component.append(Component.text("□", TextColor.color(255,85,85)));
+                            }
+                        } else if (spawnScore.get(id)==0) {
+                            //0
+                        }
+                        component.append(Component.text("]"));
+                        spawnTextDisplay.get(id).text(component);
                     }
-                }
+
+
+                    }
             }catch (Exception e){
                 e.printStackTrace();
             }
