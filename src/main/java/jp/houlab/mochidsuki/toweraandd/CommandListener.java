@@ -62,51 +62,64 @@ public class CommandListener implements CommandExecutor {
             try {
                 BlockCommandSender sender1 = (BlockCommandSender) sender;
                 Location spawnLocation = sender1.getBlock().getLocation();
+                spawnTextDisplay.get(id).teleport(spawnLocation.add(0,3,0));
+
                 for(Player player:plugin.getServer().getOnlinePlayers()){
                     if(spawnLocation.distance(player.getLocation()) <=3){
                         spawnTextDisplay.get(id).teleport(spawnLocation.add(0,3,0));
+                        int spawnScoreMaxK = config.getInt("SpawnScoreMaxK");
+                        double scale = spawnScoreMaxK/10;
+
                         if(team1.hasEntry(player.getName())){
-                            spawnScore.put(Integer.valueOf(strings[0]),spawnScore.get(id) + 1);
+                            if(spawnScore.get(id) <= spawnScoreMaxK) {
+                                spawnScore.put(id, spawnScore.get(id) + 1);
+                            }
 
                             if(player.isOp()){
                                 player.sendMessage(spawnScore.get(id)+"");
                             }
                         } else if (team2.hasEntry(player.getName())) {
-                            spawnScore.put(Integer.valueOf(strings[0]),spawnScore.get(id) - 1);
+                            if(spawnScore.get(id) >= spawnScoreMaxK *-1) {
+                                spawnScore.put(id, spawnScore.get(id) - 1);
+                            }
                             if(player.isOp()){
                                 player.sendMessage(spawnScore.get(id)+"");
                             }
                         }
+                        int score = (int) (spawnScore.get(id)/scale);
+                        if(score == 0 || spawnScore.get(id)%scale == 0) {
+                            TextComponent component = Component.text("[");
+                            if (spawnScore.get(id) > 0) {
+                                //1,blue
+                                for (int i = 0; i < 10 - score; i++) {
+                                    component = component.append(Component.text("□", TextColor.color(0, 0, 170)));
 
-                        TextComponent component = Component.text("[");
-                        int score = spawnScore.get(id);
-                        if(spawnScore.get(id)>0){
-                            //1,blue
-                            for(int i=0;i<score - 10;i++) {
-                                component.append(Component.text("□", TextColor.color(0,0,170)));
+                                }
+                                for (int i = 0; i < score; i++) {
+                                    component = component.append(Component.text("■", TextColor.color(0, 0, 170)));
+                                }
+                                for (int i = 0; i < 10; i++) {
+                                    component = component.append(Component.text("□", TextColor.color(255, 85, 85)));
+                                }
+                            } else if (spawnScore.get(id) < 0) {
+                                //2,red
+                                for (int i = 0; i < 10; i++) {
+                                    component = component.append(Component.text("□", TextColor.color(0, 0, 170)));
+                                }
+                                for (int i = 0; i < score; i++) {
+                                    component = component.append(Component.text("■", TextColor.color(255, 85, 85)));
+                                }
+                                for (int i = 0; i < 10 - score; i++) {
+                                    component = component.append(Component.text("□", TextColor.color(255, 85, 85)));
+                                }
+                            } else if (spawnScore.get(id) == 0) {
+                                //0
+                                    component = component.append(Component.text("□□□□□□□□□□□□□□□□□□□□"));
                             }
-                            for(int i=0;i<score;i++) {
-                                component.append(Component.text("■", TextColor.color(0,0,170)));
-                            }
-                            for(int i=0;i<10;i++) {
-                                component.append(Component.text("□", TextColor.color(255,85,85)));
-                            }
-                        } else if (spawnScore.get(id)<0) {
-                            //2,red
-                            for(int i=0;i<10;i++) {
-                                component.append(Component.text("□", TextColor.color(0,0,170)));
-                            }
-                            for(int i=0;i<score;i++) {
-                                component.append(Component.text("■", TextColor.color(255,85,85)));
-                            }
-                            for(int i=0;i<score - 10;i++) {
-                                component.append(Component.text("□", TextColor.color(255,85,85)));
-                            }
-                        } else if (spawnScore.get(id)==0) {
-                            //0
+                            component = component.append(Component.text("]"));
+
+                            spawnTextDisplay.get(id).text(component);
                         }
-                        component.append(Component.text("]"));
-                        spawnTextDisplay.get(id).text(component);
                     }
 
 

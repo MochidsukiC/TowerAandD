@@ -64,7 +64,6 @@ public final class TowerAandD extends JavaPlugin {
             TextDisplay textDisplay = getServer().getWorld(config.getString("World")).spawn(new Location(this.getServer().getWorld(config.getString("World")), 0, 0, 0), TextDisplay.class);
             textDisplay.text();
             spawnTextDisplay.put(i,textDisplay);
-            i++;
         }
     }
 
@@ -72,6 +71,11 @@ public final class TowerAandD extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         getLogger().info("TowerAandD Plugin Power off!");
+
+        for(int i = 0;i<config.getInt("SpawnPoint");i++) {
+            spawnTextDisplay.get(i).remove();
+        }
+
     }
 }
 
