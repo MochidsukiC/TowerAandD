@@ -66,7 +66,6 @@ public class CommandListener implements CommandExecutor {
 
                 for(Player player:plugin.getServer().getOnlinePlayers()){
                     if(spawnLocation.distance(player.getLocation()) <=3){
-                        spawnTextDisplay.get(id).teleport(spawnLocation.add(0,3,0));
                         int spawnScoreMaxK = config.getInt("SpawnScoreMaxK");
                         double scale = spawnScoreMaxK/10;
 
