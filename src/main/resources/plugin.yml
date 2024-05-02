@@ -18,3 +18,9 @@ commands:
     permission: RecordingAssistant.command.main
     permission-message: Permission denied
     usage: Banana
+  rsp:
+    aliases: [ respawntopoint ]
+    description: スポーンポイントにリスポーン
+    permission: RecordingAssistant.command.main
+    permission-message: Permission denied
+    usage: Banana

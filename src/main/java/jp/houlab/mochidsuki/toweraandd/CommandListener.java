@@ -140,6 +140,30 @@ public class CommandListener implements CommandExecutor {
 
              */
         }
-        return false;
+
+        if(s.equalsIgnoreCase("rsp")){
+            try {
+                Player player = (Player) sender;
+                if(player.getScoreboard().getEntryTeam(player.getName()) == team1){
+                    switch (strings[0]){
+                        case "0":
+                            break;
+                        case "1":
+                            break;
+                        case "2":
+                            break;
+                        case "3":
+                            break;
+                        case "4":
+                            break;
+
+                    }
+                }
+
+
+
+            }catch (Exception ignored){}
+        }
+        return true;
     }
 }
