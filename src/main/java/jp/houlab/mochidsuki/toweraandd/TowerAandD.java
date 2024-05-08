@@ -5,6 +5,7 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -55,14 +56,19 @@ public final class TowerAandD extends JavaPlugin {
         //Command
         getCommand("tad").setExecutor(new CommandListener());
         getCommand("spawnCore").setExecutor(new CommandListener());
+        getCommand("rsp").setExecutor(new CommandListener());
 
         //Event
         getServer().getPluginManager().registerEvents(new Listener(), this);
 
         //spawnTextDisplay
         for(int i = 0;i<config.getInt("SpawnPoint");i++) {
-            TextDisplay textDisplay = getServer().getWorld(config.getString("World")).spawn(new Location(this.getServer().getWorld(config.getString("World")), 0, 0, 0), TextDisplay.class);
-            textDisplay.text();
+            ArmorStand textDisplay = getServer().getWorld(config.getString("World")).spawn(new Location(this.getServer().getWorld(config.getString("World")), 0, 0, 0), ArmorStand.class);
+            textDisplay.setVisible(false);
+            textDisplay.setGravity(false);
+            textDisplay.setCollidable(false);
+            textDisplay.customName();
+            textDisplay.setCustomNameVisible(true);
             spawnTextDisplay.put(i,textDisplay);
         }
     }
@@ -91,6 +97,7 @@ static TeamStatus team2 = new TeamStatus();
 static SiteStatus siteStatus1 = new SiteStatus();
 static SiteStatus siteStatus2 = new SiteStatus();
 static HashMap<Integer,Integer> spawnScore = new HashMap<>();
-static HashMap<Integer,TextDisplay> spawnTextDisplay = new HashMap<>();
-
+static HashMap<Integer,ArmorStand> spawnTextDisplay = new HashMap<>();
+static HashMap<Integer,Location> spawnLocation = new HashMap<>();
+static HashMap<Player,Boolean> canUseSpawner = new HashMap<>();
 }
