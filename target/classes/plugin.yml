@@ -1,0 +1,20 @@
+name: TowerAandD
+version: '1.0-SNAPSHOT'
+main: jp.houlab.mochidsuki.toweraandd.TowerAandD
+api-version: '1.20'
+
+
+
+commands:
+  tad:
+    aliases: [TowerAandD]
+    description: メインコマンド
+    permission: RecordingAssistant.command.main
+    permission-message: Permission denied
+    usage: Banana
+  spawnCore:
+    aliases: [spawncore]
+    description: メインコマンド
+    permission: RecordingAssistant.command.main
+    permission-message: Permission denied
+    usage: Banana
