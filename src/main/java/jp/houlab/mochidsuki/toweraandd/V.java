@@ -9,10 +9,10 @@ import java.util.HashMap;
 
 public class V{
 //次に付与される資金の記憶システム
-static HashMap<Player,Integer> nextPlayerMoney;
+public static HashMap<Player,Integer> nextPlayerMoney;
 
-static int Round;
-static int RoundTimer;
+public static int Round;
+public static int RoundTimer;
 static BossBar TimerBossBar;
 static TeamStatus team1 = new TeamStatus();
 static TeamStatus team2 = new TeamStatus();
