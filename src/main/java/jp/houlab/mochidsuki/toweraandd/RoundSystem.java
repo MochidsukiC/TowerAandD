@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.title.Title;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -113,13 +114,17 @@ public class RoundSystem {
 
         for (Player player : winTeam.getPlayers()){
             TextComponent textComponent = Component.text("ラウンド勝利!!").color(TextColor.color(255,254,0));
-            player.showTitle(Title.title(textComponent,Component.text("")));
-            player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE,100,1);
+            if(player != null) {
+                player.showTitle(Title.title(textComponent, Component.text("")));
+                player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 100, 1);
+            }
         }
         for (Player player : loseTeam.getPlayers()) {
             TextComponent textComponent = Component.text("ラウンド敗北!!").color(TextColor.color(255, 254, 0));
-            player.showTitle(Title.title(textComponent, Component.text("")));
-            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 100, 1);
+            if(player != null) {
+                player.showTitle(Title.title(textComponent, Component.text("")));
+                player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 100, 1);
+            }
         }
 
         new BukkitRunnable(){
@@ -160,14 +165,18 @@ public class RoundSystem {
 
 
         for (Player player : winTeam.getPlayers()){
-            TextComponent textComponent = Component.text("ゲーム勝利!!").color(TextColor.color(255,254,0));
-            player.showTitle(Title.title(textComponent,Component.text("")));
-            player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE,100,1);
+            if(player != null) {
+                TextComponent textComponent = Component.text("ゲーム勝利!!").color(TextColor.color(255, 254, 0));
+                player.showTitle(Title.title(textComponent, Component.text("")));
+                player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 100, 1);
+            }
         }
         for (Player player : loseTeam.getPlayers()) {
-            TextComponent textComponent = Component.text("ゲーム敗北!!").color(TextColor.color(255, 254, 0));
-            player.showTitle(Title.title(textComponent, Component.text("")));
-            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 100, 1);
+            if(player != null) {
+                TextComponent textComponent = Component.text("ゲーム敗北!!").color(TextColor.color(255, 254, 0));
+                player.showTitle(Title.title(textComponent, Component.text("")));
+                player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 100, 1);
+            }
         }
     }
 

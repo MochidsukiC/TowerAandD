@@ -1,5 +1,6 @@
 package jp.houlab.mochidsuki.toweraandd;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -12,12 +13,16 @@ import static jp.houlab.mochidsuki.toweraandd.TowerAandD.*;
 public class GameStarter {
     static public void playerTP() {
         for (String entity : team1.getEntries()) {
-            Player player = plugin.getServer().getPlayer(entity);
-            player.teleport(V.team1.getSiteStatus().getSpawnLocation());
+            if(Bukkit.getOfflinePlayer(entity).isOnline()) {
+                Player player = plugin.getServer().getPlayer(entity);
+                player.teleport(V.team1.getSiteStatus().getSpawnLocation());
+            }
         }
         for (String entity : team2.getEntries()) {
-            Player player = plugin.getServer().getPlayer(entity);
-            player.teleport(V.team2.getSiteStatus().getSpawnLocation());
+            if(Bukkit.getOfflinePlayer(entity).isOnline()) {
+                Player player = plugin.getServer().getPlayer(entity);
+                player.teleport(V.team2.getSiteStatus().getSpawnLocation());
+            }
         }
     }
 
